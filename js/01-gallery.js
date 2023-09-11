@@ -26,24 +26,26 @@ function handleClick(event) {
     if (event.target.nodeName !== 'IMG') {
         return;
     };
-    
+
     const clickedImageSource = event.target.dataset.source;
     const galleryItem = galleryItems.find(({ original }) => original === clickedImageSource);
-    console.log(galleryItem);
 
     if (galleryItem) {
         const instance = basicLightbox.create(`
             <div>
-            <img src="${galleryItem.original}" alt="${galleryItem.description}" />
+                <img src="${galleryItem.original}" alt="${galleryItem.description}" />
             </div>
-        `);
+        `,
+        {onClose: (instance) => {
+        window.removeEventListener('keydown', onCloseHandler)
+        }});
 
+        window.addEventListener('keydown', onCloseHandler);
+        function onCloseHandler(event) {
+            if (event.key === 'Escape') {
+                instance.close();
+            }};
+        
         instance.show();
-
-        instance.element().addEventListener('click', () => {
-        instance.close();
-        });
-
-    };
+    }
 };
-

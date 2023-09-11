@@ -5,7 +5,6 @@ const list = document.querySelector('.gallery');
 
 list.insertAdjacentHTML('beforeend', createMarkupList(galleryItems));
 
-list.addEventListener('click', handleClick);
 
 function createMarkupList(arr) {
   return arr.map(({ preview, description, original }) => `
@@ -22,10 +21,3 @@ const lightbox = new SimpleLightbox('.gallery a', {
   captionsData: 'alt',
   captionDelay: 250,
 });
-
-function handleClick(event) {
-  event.preventDefault();
-  if (event.target.nodeName === 'IMG') {
-  };
-};
-console.log(galleryItems);
