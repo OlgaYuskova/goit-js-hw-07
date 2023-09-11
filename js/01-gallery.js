@@ -41,6 +41,7 @@ function handleClick(event) {
         }});
 
         window.addEventListener('keydown', onCloseHandler);
+        
         function onCloseHandler(event) {
             if (event.key === 'Escape') {
                 instance.close();
